@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
-
-import styled from "styled-components/native"; // Version can be specified in package.json
-import Carousel from 'react-native-snap-carousel'; // Version can be specified in package.json
 import {
     Dimensions,
-    ScrollView,
     StyleSheet,
     Text,
     View,
-    TouchableWithoutFeedback,
     Image,
-    FlatList
+    Platform
 } from "react-native";
-import {Card, CardItem, Body, Left} from 'native-base';
+import {Card, CardItem, Body, Left, Input, Button} from 'native-base';
+import HomeHeader from "./HomeHeader";
+import {OptimizedFlatList} from 'react-native-optimized-flatlist'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -21,32 +20,7 @@ export default class HomeScreen extends React.Component {
             errors: []
         }
         this.props = props;
-        this._carousel = {};
-        this.init();
     }
-
-    init() {
-        this.state = this.headerSlayers;
-        console.log("ThumbnailCarousel Props: ", this.props)
-    }
-
-    headerSlayers = {
-        slayers: [
-            {
-                id: "WpIAc9by5iU",
-                thumbnail: "https://indiadesire.com/content/upto%2030%20to%2070.jpg",
-                title: ""
-            }, {
-                id: "sNPnbI1arSE",
-                thumbnail: "https://www.shopickr.com/wp-content/uploads/2017/06/zivame-insane-lingerie-sale-2017.jpg",
-                title: ""
-            }, {
-                id: "VOgFZfRVaww",
-                thumbnail: "https://www.shopickr.com/wp-content/uploads/2015/08/zivame-peri-peri-sale-lingerie-bra-8-15-2015.jpg",
-                title: ""
-            }
-        ]
-    };
 
 
     bottomCards = {
@@ -63,17 +37,7 @@ export default class HomeScreen extends React.Component {
     }
 
 
-
-
-
-
-
-    handleSnapToItem(index) {
-        console.log("snapped to ", index)
-    }
-
-
-    drawItem(item) {
+    drawBottomItem(item) {
         return (
             <Card>
                 <CardItem>
@@ -96,56 +60,53 @@ export default class HomeScreen extends React.Component {
     }
 
 
-    _renderItem = ({item, index}) => {
-        console.log("rendering,", index, item)
-        return (
-            <ThumbnailBackgroundView>
-                <CurrentVideoTO
-                    onPress={() => {
-                        console.log("clicked to index", index)
-                        this._carousel.snapToItem(index);
-                    }}
-                >
-                    <CurrentVideoImage source={{uri: item.thumbnail}}/>
-                </CurrentVideoTO>
-                <VideoTitleText>{item.title}</VideoTitleText>
-            </ThumbnailBackgroundView>
-        );
-    }
-
     render = () => {
 
         console.log("slayers: updating")
 
         return (
+
             <View style={styles.content}>
 
-
-                <View style={styles.StyleFragmentOffertView}>
-                    <Text style={{color: 'white', fontFamily: 'BEBAS', fontSize: 50, marginLeft: 10, marginTop: 10}}>50%
-                        OFF</Text>
+                <View style={styles.col}>
+                    <HomeHeader/>
+                    <View style={styles.input}>
+                        <Input placeholder='    Where do U go?' placeholderTextColor='rgba(0,0,0,0.3)'
+                               style={{fontSize: 14, left: 50}}/>
+                        <Button style={styles.inputbutton}>
+                            <Ionicons name="md-pulse" size={32} color="#fff"/>
+                        </Button>
+                    </View>
                 </View>
+                {/*<View style={styles.col}>*/}
+                {/*<View style={styles.StyleFragmentOffertView}>*/}
+                {/*<Text style={{color: 'white', fontFamily: 'BEBAS', fontSize: 50, marginLeft: 10, marginTop: 10}}>50%  OFF</Text>*/}
+                {/*</View>*/}
+                {/*</View>*/}
 
-                <View style={styles.content}>
-                    <View style={styles.col}>
 
+                <View style={styles.col}>
+
+                    <View style={styles.content}>
                         <View style={styles.colDalam}>
-                            <Image style={{width: 170, height: 170, marginBottom: 0}}
+                            <Image style={{width: 170, height: 150, marginBottom: 0}}
                                    source={{uri: 'https://via.placeholder.com/350x250'}}/>
                         </View>
 
                         <View style={styles.colDalam}>
-                            <Image style={{width: 170, height: 170, marginBottom: 0}}
+                            <Image style={{width: 170, height: 150, marginBottom: 0}}
                                    source={{uri: 'https://via.placeholder.com/350x250'}}/>
                         </View>
-
                     </View>
                     <View style={styles.col}>
-                        <FlatList horizontal showsHorizontalScrollIndicator={false}
-                                  renderItem={({item}) => this.drawItem(item)} data={this.bottomCards.cards}/>
+                        <OptimizedFlatList horizontal showsHorizontalScrollIndicator={false}
+                                           renderItem={({item}) => this.drawBottomItem(item)}
+                                           data={this.bottomCards.cards}
+                                           initialNumToRender={15}
+                                           style={{marginBottom: 50}}
+                        />
                     </View>
                 </View>
-
 
             </View>
 
@@ -155,84 +116,115 @@ export default class HomeScreen extends React.Component {
 }
 
 
+const {width, height} = Dimensions.get('window')
+
 const styles = StyleSheet.create({
 
+        input: {
+            zIndex: 1,
+            position: 'absolute',
+            top: height / 4.5,
+            left: 35,
+            width: width / 1.2, height: 47,
+            backgroundColor: '#fff',
+            // textIndent: 10,
+            // borderRadius: 5,
+            ...Platform.select({
+                ios: {
+                    shadowColor: 'rgba(0,0,0, .5)',
+                    shadowOffset: {height: 0, width: 0},
+                    shadowOpacity: 1,
+                    shadowRadius: 5,
+                },
+                android: {
+                    elevation: 10
+                },
+            }),
+        },
 
-    StyleFragmentOffertView: {
-        justifyContent: 'center',
-        backgroundColor: 'black',
-        height: 70,
-        width: Dimensions.get('window').width - 12,
-        marginRight: 'auto',
-        marginLeft: 'auto',
-        marginTop: 7,
-        borderRadius: 5,
-        fontFamily: 'BEBAS',
-    },
-
-    content: {
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        padding: 5,
-        justifyContent: 'center'
-    },
-    col: {
-        width: '100%',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-    },
-    colDalam: {
-        flex: 1,
-        padding: 5
-    },
-    contentBanner: {
-        width: '100%',
-
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-});
+        inputbutton: {
+            position: 'absolute',
+            width: 58,
+            height: 50,
+            left: -10,
+            backgroundColor: '#FE9A2E',
+            justifyContent: 'center', alignItems: 'center',
+        },
 
 
-const {width} = Dimensions.get('window')
+        StyleFragmentOffertView: {
+            justifyContent: 'center',
+            backgroundColor: 'black',
+            height: 70,
+            width: Dimensions.get('window').width - 12,
+            marginRight: 'auto',
+            marginLeft: 'auto',
+            marginTop: 7,
+            borderRadius: 5,
+            fontFamily: 'BEBAS',
+        },
+
+        content: {
+            flex: 1,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            padding: 5,
+            justifyContent: 'center'
+        },
+        col: {
+            width: '100%',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+        },
+        colDalam: {
+            padding: 5
+        },
+        contentBanner: {
+            width: '100%',
+
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+
+    })
+;
 
 
-const VideoTitleText = styled.Text`
-  color: white;
-  top: 0;
-  font-size:50
-`
-const CurrentVideoImage = styled.Image`
-  top: 25;
-  box-shadow: 5px 10px;
-  width: ${width};
-  height: 200;
-`
-
-const ThumbnailBackgroundView = styled.View`
-  justify-content: center;
-  align-items: center;
-  width: ${width}; 
-`
-
-const FragmentOffertView = styled.View`
-  justify-content: center;
-  background-color: black;
-  height: 70;
-  width: ${width - 10};
-  margin-left:auto;
-  margin-right:auto;
-  margin-top:7;
-`
-
-const Container = styled.View`
-`
-
-const CurrentVideoTO = styled.TouchableOpacity`
-`
-const CarouselBackgroundView = styled.View`
-  background-color:white;
-  height: 200;
-  width: ${width};
-`
+// const VideoTitleText = styled.Text`
+//   color: white;
+//   top: 0;
+//   font-size:50
+// `
+// const CurrentVideoImage = styled.Image`
+//   top: 25;
+//   box-shadow: 5px 10px;
+//   width: ${width};
+//   height: 200;
+// `
+//
+// const ThumbnailBackgroundView = styled.View`
+//   justify-content: center;
+//   align-items: center;
+//   width: ${width};
+// `
+//
+// const FragmentOffertView = styled.View`
+//   justify-content: center;
+//   background-color: black;
+//   height: 70;
+//   width: ${width - 10};
+//   margin-left:auto;
+//   margin-right:auto;
+//   margin-top:7;
+// `
+//
+// const Container = styled.View`
+// `
+//
+// const CurrentVideoTO = styled.TouchableOpacity`
+// `
+// const CarouselBackgroundView = styled.View`
+//   background-color:white;
+//   height: 200;
+//   width: ${width};
+// `
