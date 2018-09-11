@@ -5,7 +5,8 @@ import {
     Text,
     View,
     Image,
-    Platform
+    Platform,
+    ScrollView
 } from "react-native";
 import {Card, CardItem, Body, Left, Input, Button} from 'native-base';
 import HomeHeader from "./HomeHeader";
@@ -26,13 +27,13 @@ export default class HomeScreen extends React.Component {
     bottomCards = {
         cards: [
             {'address': 'https://loveafricabikinis.tiendasandreani.com/uploads/imagenes/thumbnail/710x710-47e8d786e812b0ee1892c8d4c500e6faf99b0250.jpg'},
-            {'address': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm1iq2c0a0ybLiKBeWlv7hWQNgkOjx2SVc0TNxp3HiwvLTgJEk'},
+            {'address': 'https://www.tupperware.com.ar/service/appng/tupperware-products/webservice/images/243021_219x219.jpg'},
             {'address': 'https://zona-ac.com/wp-content/uploads/2018/02/Wake-Bottom-Bombacha-Less-Muaa.png'},
-            {'address': 'https://images-na.ssl-images-amazon.com/images/I/81TIEWcS9bL._SX679_.jpg'},
+            {'address': 'https://www.tupperware.com.ar/service/appng/tupperware-products/webservice/images/037544_219x219.jpg'},
             {'address': 'https://i.etsystatic.com/7982454/r/il/8d2c00/1407716743/il_fullxfull.1407716743_tdhs.jpg'},
-            {'address': 'https://d26lpennugtm8s.cloudfront.net/stores/064/382/products/17xabtr272727271-1e7f4d132e8138116e15305795779966-480-0.jpgpsid1'},
+            {'address': 'https://www.tupperware.com.ar/service/appng/tupperware-products/webservice/images/269100_219x219.jpg'},
             {'address': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXII3Ewj-m2-SkECe9cdts25ZFoyuYqj-MGpRc8lKFAj3gTVBx'},
-            {'address': 'http://www.cotillonconcept.com.ar/images/2948-LABIAL-BOMBACHA-SORPRESA-COTILLON-EROTICO-BROMAS-DESPEDIDA-SOLTERA-SOLTERO.png'}
+            {'address': 'https://www.tupperware.com.ar/service/appng/tupperware-products/webservice/images/073361_219x219.jpg'}
         ]
     }
 
@@ -65,51 +66,49 @@ export default class HomeScreen extends React.Component {
         console.log("slayers: updating")
 
         return (
-
-            <View style={styles.content}>
-
-                <View style={styles.col}>
-                    <HomeHeader/>
-                    <View style={styles.input}>
-                        <Input placeholder='    Where do U go?' placeholderTextColor='rgba(0,0,0,0.3)'
-                               style={{fontSize: 14, left: 50}}/>
-                        <Button style={styles.inputbutton}>
-                            <Ionicons name="md-pulse" size={32} color="#fff"/>
-                        </Button>
-                    </View>
-                </View>
-                {/*<View style={styles.col}>*/}
-                {/*<View style={styles.StyleFragmentOffertView}>*/}
-                {/*<Text style={{color: 'white', fontFamily: 'BEBAS', fontSize: 50, marginLeft: 10, marginTop: 10}}>50%  OFF</Text>*/}
-                {/*</View>*/}
-                {/*</View>*/}
-
-
-                <View style={styles.col}>
-
-                    <View style={styles.content}>
-                        <View style={styles.colDalam}>
-                            <Image style={{width: 170, height: 150, marginBottom: 0}}
-                                   source={{uri: 'https://via.placeholder.com/350x250'}}/>
-                        </View>
-
-                        <View style={styles.colDalam}>
-                            <Image style={{width: 170, height: 150, marginBottom: 0}}
-                                   source={{uri: 'https://via.placeholder.com/350x250'}}/>
-                        </View>
-                    </View>
+            <ScrollView>
+                <View style={styles.content}>
                     <View style={styles.col}>
-                        <OptimizedFlatList horizontal showsHorizontalScrollIndicator={false}
-                                           renderItem={({item}) => this.drawBottomItem(item)}
-                                           data={this.bottomCards.cards}
-                                           initialNumToRender={15}
-                                           style={{marginBottom: 50}}
-                        />
+                        <HomeHeader/>
+                        <View style={styles.input}>
+                            <Input placeholder='    Where do U go?' placeholderTextColor='rgba(0,0,0,0.3)'
+                                   style={{fontSize: 14, left: 50}}/>
+                            <Button style={styles.inputbutton}>
+                                <Ionicons name="md-pulse" size={32} color="#fff"/>
+                            </Button>
+                        </View>
+                    </View>
+                    {/*<View style={styles.col}>*/}
+                    {/*<View style={styles.StyleFragmentOffertView}>*/}
+                    {/*<Text style={{color: 'white', fontFamily: 'BEBAS', fontSize: 50, marginLeft: 10, marginTop: 10}}>50%  OFF</Text>*/}
+                    {/*</View>*/}
+                    {/*</View>*/}
+
+
+                    <View style={styles.col}>
+
+                        <View style={styles.content}>
+                            <View style={styles.colDalam}>
+                                <Image style={styles.centralImage}
+                                       source={{uri: 'https://storage.jualo.com/original/7419107/tupperware-warmie-set-rumah-tangga-alat-dapur-7419107.jpg'}}/>
+                            </View>
+
+                            <View style={styles.colDalam}>
+                                <Image style={styles.centralImage}
+                                       source={{uri: 'https://www.kiabi.ae/on/demandware.static/-/Sites-kiabi-master-catalog/default/dwe3856538/VP/VP323/VP323_MINIBLAC_medium_1.jpg'}}/>
+                            </View>
+                        </View>
+                        <View style={styles.col}>
+                            <OptimizedFlatList horizontal showsHorizontalScrollIndicator={false}
+                                               renderItem={({item}) => this.drawBottomItem(item)}
+                                               data={this.bottomCards.cards}
+                                               initialNumToRender={15}
+                                               style={{marginBottom: 50}}
+                            />
+                        </View>
                     </View>
                 </View>
-
-            </View>
-
+            </ScrollView>
 
         );
     }
@@ -140,6 +139,27 @@ const styles = StyleSheet.create({
                     elevation: 10
                 },
             }),
+        },
+
+        centralImage: {
+            width: width / 2.25,
+            height: 160,
+            marginBottom: 0,
+            marginTop: 8,
+
+
+            borderWidth: 1,
+            borderRadius: 2,
+            borderColor: '#ddd',
+            borderBottomWidth: 0,
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.8,
+            shadowRadius: 15,
+            elevation: 10,
+            backgroundColor: '#FE9A2E',
+
+
         },
 
         inputbutton: {
