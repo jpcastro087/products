@@ -91,11 +91,13 @@ export default class HomeScreen extends React.Component {
                             <View style={styles.colDalam}>
                                 <Image style={styles.centralImage}
                                        source={{uri: 'https://storage.jualo.com/original/7419107/tupperware-warmie-set-rumah-tangga-alat-dapur-7419107.jpg'}}/>
+                                <View style={styles.frontCover}/>
                             </View>
 
                             <View style={styles.colDalam}>
                                 <Image style={styles.centralImage}
                                        source={{uri: 'https://www.kiabi.ae/on/demandware.static/-/Sites-kiabi-master-catalog/default/dwe3856538/VP/VP323/VP323_MINIBLAC_medium_1.jpg'}}/>
+                                <View style={styles.frontCover}/>
                             </View>
                         </View>
                         <View style={styles.col}>
@@ -161,6 +163,20 @@ const styles = StyleSheet.create({
 
 
         },
+
+        frontCover: {
+            position: 'absolute',
+            backgroundColor: 'rgba(52, 52, 52, 0.8)',
+            width: width / 2.24,
+            height: 70,
+            marginBottom: 0,
+            marginTop: 103,
+            marginLeft:5,
+            elevation: 10,
+            paddingBottom: 1
+        },
+
+
 
         inputbutton: {
             position: 'absolute',
