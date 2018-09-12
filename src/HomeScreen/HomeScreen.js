@@ -78,12 +78,6 @@ export default class HomeScreen extends React.Component {
                             </Button>
                         </View>
                     </View>
-                    {/*<View style={styles.col}>*/}
-                    {/*<View style={styles.StyleFragmentOffertView}>*/}
-                    {/*<Text style={{color: 'white', fontFamily: 'BEBAS', fontSize: 50, marginLeft: 10, marginTop: 10}}>50%  OFF</Text>*/}
-                    {/*</View>*/}
-                    {/*</View>*/}
-
 
                     <View style={styles.col}>
 
@@ -91,13 +85,17 @@ export default class HomeScreen extends React.Component {
                             <View style={styles.colDalam}>
                                 <Image style={styles.centralImage}
                                        source={{uri: 'https://storage.jualo.com/original/7419107/tupperware-warmie-set-rumah-tangga-alat-dapur-7419107.jpg'}}/>
-                                <View style={styles.frontCover}/>
+                                <View style={styles.frontCover}>
+                                    <Text style={styles.frontCoverText}>Tupperware!</Text>
+                                </View>
                             </View>
 
                             <View style={styles.colDalam}>
                                 <Image style={styles.centralImage}
                                        source={{uri: 'https://www.kiabi.ae/on/demandware.static/-/Sites-kiabi-master-catalog/default/dwe3856538/VP/VP323/VP323_MINIBLAC_medium_1.jpg'}}/>
-                                <View style={styles.frontCover}/>
+                                <View style={styles.frontCover}>
+                                    <Text style={styles.frontCoverText}>Lencería!</Text>
+                                </View>
                             </View>
                         </View>
                         <View style={styles.col}>
@@ -166,14 +164,23 @@ const styles = StyleSheet.create({
 
         frontCover: {
             position: 'absolute',
-            backgroundColor: 'rgba(52, 52, 52, 0.8)',
+            backgroundColor: 'rgba(52, 52, 52, 0.5)',
             width: width / 2.24,
-            height: 70,
+            height: 55,
             marginBottom: 0,
-            marginTop: 103,
+            marginTop: 119,
             marginLeft:5,
             elevation: 10,
-            paddingBottom: 1
+            paddingBottom: 1,
+            justifyContent: 'center',
+            alignItems: 'baseline'
+        },
+
+        frontCoverText: {
+            elevation: 11,
+            color: 'white',
+            fontFamily: 'Lobster-Regular',
+            marginLeft:8,
         },
 
 
@@ -197,7 +204,7 @@ const styles = StyleSheet.create({
             marginLeft: 'auto',
             marginTop: 7,
             borderRadius: 5,
-            fontFamily: 'BEBAS',
+            fontFamily: 'CaviarDreams',
         },
 
         content: {

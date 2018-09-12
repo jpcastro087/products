@@ -71,6 +71,11 @@
 		<string>FontAwesome5_Brands.ttf</string>
 		<string>FontAwesome5_Regular.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
+		<string>CaviarDreams_Bold.ttf</string>
+		<string>CaviarDreams_BoldItalic.ttf</string>
+		<string>CaviarDreams_Italic.ttf</string>
+		<string>CaviarDreams.ttf</string>
+		<string>Lobster-Regular.ttf</string>
 	</array>
 </dict>
 </plist>
